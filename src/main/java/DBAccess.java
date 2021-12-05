@@ -6,11 +6,10 @@ public class DBAccess {
         static String username = "root";
         static String password = "123456";
 
-    public static ArrayList<Team> getAllTeams(){
+    public static ArrayList<Team> fetchTeams(){
         String sql = "SELECT * FROM teams";
         ArrayList<Team> teams = new ArrayList<>();
-        try {
-            Connection connection = DriverManager.getConnection(url, username, password);
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -21,13 +20,49 @@ public class DBAccess {
                 String sport = result.getString("sport");
                 teams.add(new Team(id, name, league, sport));
             }
-            result.close();
-            preparedStatement.close();
         }
         catch (Exception e){
             e.printStackTrace();
         }
         return teams;
+    }
+
+    public static ArrayList<Event> fetchEvents(){
+        String sql = "SELECT * FROM events";
+        ArrayList<Event> events = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next()) {
+                int id = result.getInt("id");
+                String homeTeamName = fetchTeamName(result.getInt("_home"));
+                String awayTeamName = fetchTeamName(result.getInt("_away"));
+                Date startDateTime = result.getDate("startDateTime");
+                Date endDateTime = result.getDate("endDateTime");
+                String gameResult = result.getString("result");
+                events.add(new Event(id, homeTeamName, awayTeamName, startDateTime, endDateTime, gameResult));
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return events;
+    }
+
+    private static String fetchTeamName(int teamId) throws NullPointerException {
+        String sql = "SELECT * FROM teams where id = ? LIMIT 1";
+       try (Connection connection = DriverManager.getConnection(url, username, password)){
+           PreparedStatement preparedStatement = connection.prepareStatement(sql);
+           preparedStatement.setInt(1, teamId);
+           ResultSet result = preparedStatement.executeQuery();
+           if (result.next()) {
+               return result.getString("name");
+           }
+       } catch (Exception e){
+           e.printStackTrace();
+       }
+       return null;
     }
 
     public void initializedDB() {

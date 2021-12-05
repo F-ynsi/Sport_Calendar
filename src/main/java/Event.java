@@ -2,17 +2,17 @@ import java.sql.Date;
 
 public class Event {
     private int id;
-    private int homeTeamId;
-    private int awayTeamId;
-    private Date StartDateTime;
+    private String homeTeamName;
+    private String awayTeamName;
+    private Date startDateTime;
     private Date endDateTime;
     private String result;
 
-    public Event(int id, int homeTeamId, int awayTeamId, Date startDateTime, Date endDateTime, String result) {
+    public Event(int id, String homeTeamName, String awayTeamName, Date startDateTime, Date endDateTime, String result) {
         this.id = id;
-        this.homeTeamId = homeTeamId;
-        this.awayTeamId = awayTeamId;
-        StartDateTime = startDateTime;
+        this.homeTeamName = homeTeamName;
+        this.awayTeamName = awayTeamName;
+        this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.result = result;
     }
@@ -25,28 +25,28 @@ public class Event {
         this.id = id;
     }
 
-    public int getHomeTeamId() {
-        return homeTeamId;
+    public String getHomeTeamName() {
+        return homeTeamName;
     }
 
-    public void setHomeTeamId(int homeTeamId) {
-        this.homeTeamId = homeTeamId;
+    public void setHomeTeamName(String homeTeamName) {
+        this.homeTeamName = homeTeamName;
     }
 
-    public int getAwayTeamId() {
-        return awayTeamId;
+    public String getAwayTeamName() {
+        return awayTeamName;
     }
 
-    public void setAwayTeamId(int awayTeamId) {
-        this.awayTeamId = awayTeamId;
+    public void setAwayTeamName(String awayTeamName) {
+        this.awayTeamName = awayTeamName;
     }
 
     public Date getStartDateTime() {
-        return StartDateTime;
+        return startDateTime;
     }
 
     public void setStartDateTime(Date startDateTime) {
-        StartDateTime = startDateTime;
+        this.startDateTime = startDateTime;
     }
 
     public Date getEndDateTime() {
