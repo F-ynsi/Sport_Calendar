@@ -1,17 +1,17 @@
-import java.sql.Date;
-
 public class Event {
     private int id;
     private String homeTeamName;
     private String awayTeamName;
-    private Date startDateTime;
-    private Date endDateTime;
+    private String sport;
+    private String startDateTime;
+    private String endDateTime;
     private String result;
 
-    public Event(int id, String homeTeamName, String awayTeamName, Date startDateTime, Date endDateTime, String result) {
+    public Event(int id, String homeTeamName, String awayTeamName, String sport, String startDateTime, String endDateTime, String result) {
         this.id = id;
         this.homeTeamName = homeTeamName;
         this.awayTeamName = awayTeamName;
+        this. sport = sport;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.result = result;
@@ -41,19 +41,27 @@ public class Event {
         this.awayTeamName = awayTeamName;
     }
 
-    public Date getStartDateTime() {
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public String getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(Date startDateTime) {
+    public void setStartDateTime(String startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public Date getEndDateTime() {
+    public String getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(Date endDateTime) {
+    public void setEndDateTime(String endDateTime) {
         this.endDateTime = endDateTime;
     }
 
